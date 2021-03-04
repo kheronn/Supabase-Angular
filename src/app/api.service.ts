@@ -45,9 +45,15 @@ export class ApiService {
       .match({ id: todo.id })
   }
 
+  async updatCheck(todo: Todo) {
+    const { data, error } = await this.supabase
+      .from('projetos')
+      .update({ done: todo.done })
+      .match({ id: todo.id })
+  }
 
 
-  ouvirTodos() {
+  listenAll() {
     const mySubscription = this.supabase
       .from('projetos')
       .on('*', payload => {

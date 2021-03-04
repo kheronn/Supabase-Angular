@@ -1,7 +1,6 @@
 import { Todo } from './todo.model';
 import { ApiService } from './api.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -17,25 +16,21 @@ export class AppComponent implements OnInit {
 
   }
   async ngOnInit(): Promise<void> {
-    let ouvir = this.api.ouvirTodos();
-    console.log(ouvir)
+    let listen = this.api.listenAll();
     this.api.getTodos()
       .then(todos => this.todos = todos)
     this.todo = new Todo();
   }
 
   addTodo() {
-    if (this.todo.id) { //Atualiza{
+    if (this.todo.id) { //Update if exists ID{
       this.update(this.todo);
       return;
     }
     this.api.addTodo(this.todo).then((payload) => {
-      console.log(payload.data)
       this.todos.push(payload.data[0]);
-      console.log(payload.error)
-    }).catch(erro => console.log(`Erro ao adicionar TODO ${erro}`))
-    this.todo = new Todo();
-    this.actionLabel = "ADD";
+    }).catch(erro => console.log(`Error in add TODO ${erro}`))
+    this.clear();
   }
 
   delete(todo: Todo) {
@@ -51,17 +46,22 @@ export class AppComponent implements OnInit {
     this.actionLabel = "UPDATE";
   }
 
+  check(todoCheck: Todo) {
+    let todo = todoCheck;
+    todo.done = !todoCheck.done;
+    this.update(todo);
+  }
+
+
   update(todo: Todo) {
     this.api.update(todo)
       .then(dados => {
-        console.log(dados)
-        var foundIndex = this.todos.findIndex(t => t.id == todo.id);
+        let foundIndex = this.todos.findIndex(t => t.id == todo.id);
         this.todos[foundIndex] = todo;
         this.todo = new Todo();
-        this.actionLabel = "ADD";
+        this.clear();
       })
   }
-
 
   arrayRemove(arr, value) {
     return arr.filter((ele) => {
@@ -69,5 +69,9 @@ export class AppComponent implements OnInit {
     });
   }
 
+  clear() {
+    this.todo = new Todo();
+    this.actionLabel = "ADD";
+  }
 
 }
