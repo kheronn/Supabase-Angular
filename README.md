@@ -1,27 +1,28 @@
-# AngularSupabase
+# Angular e Supabase
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.1.
+A CRUD of TODOs using version 11 of Angular and Supabase.
 
-## Development server
+[![CRUD](https://raw.githubusercontent.com/kheronn/Supabase-Angular/main/src/assets/todo-supabase-angular.gif)(https://raw.githubusercontent.com/kheronn/Supabase-Angular/main/src/assets/todo-supabase-angular.gif)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Demo 
 
-## Code scaffolding
+[Site](https://supabase-angular.vercel.app/)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Tutorial
 
-## Build
+[Angular 11 and Supabase — An alternative to Firebase !?
+](https://kheronn-machado.medium.com/angular-11-and-supabase-an-alternative-to-firebase-63bafbd4febc/)
+[A CRUD with Angular and Supabase
+](http:///) **Coming Soon**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+[Angular 11 e Supabase — Uma alternativa ao Firebase !?
+](https://kheronn-machado.medium.com/angular-11-e-supabase-uma-alternativa-ao-firebase-5d76f49b0182)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+[Um CRUD com Angular e Supabase](http://) **EM BRVE**
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Angular <s>8</s> 11 com Firebase - Construindo uma aplicação integrada com a plataforma do Google
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Atualizamos para última versão do Angular do meu Livro.
+[Casa do Código](https://www.casadocodigo.com.br/pages/sumario-angular-firebase)
