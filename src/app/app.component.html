@@ -13,7 +13,7 @@
         <div class="col col-11 mx-auto">
             <div class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
                 <div class="col">
-                    <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" [(ngModel)]="todo.nome" type="text" placeholder="Add new ..">
+                    <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" [(ngModel)]="todo.name" type="text" placeholder="Add new ..">
                 </div>
 
                 <div class="col-auto px-1 mr-2">
@@ -37,7 +37,7 @@
                     </h2>
                 </div>
                 <div class="col px-1 m-1 d-flex align-items-center">
-                    <input type="text" class="form-control form-control-lg border-0 edit-todo-input bg-transparent rounded px-3" readonly [value]="todo.nome" [title]="todo.nome" />
+                    <input type="text" class="form-control form-control-lg border-0 edit-todo-input bg-transparent rounded px-3" readonly [value]="todo.name" [title]="todo.name" />
 
                 </div>
                 <div class="col-auto m-1 p-0 px-3 d-none">

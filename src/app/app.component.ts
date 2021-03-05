@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     let listen = this.api.listenAll();
     this.api.getTodos()
-      .then(todos => this.todos = todos)
+      .then(data => this.todos = data.todos)
     this.todo = new Todo();
   }
 
