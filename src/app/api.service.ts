@@ -7,7 +7,7 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js'
 })
 export class ApiService {
   supabaseUrl = "https://eryktzqdtxyesygmuxeg.supabase.co";
-  supabaseKey =   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYxNDU1Mjg4MywiZXhwIjoxOTMwMTI4ODgzfQ.tr25Nyviyvj3vcmZMPbBqRCnt6XcOc4Ui6the_WWh9s";
+  supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYxNDU1Mjg4MywiZXhwIjoxOTMwMTI4ODgzfQ.tr25Nyviyvj3vcmZMPbBqRCnt6XcOc4Ui6the_WWh9s";
 
   supabase: SupabaseClient;
 
@@ -15,28 +15,27 @@ export class ApiService {
     this.supabase = createClient(this.supabaseUrl, this.supabaseKey);
   }
 
+  async addTodo(todo: Todo) {
+    const { data, error } = await this.supabase
+      .from<Todo>('todos')
+      .insert(todo)
+    return { data, error };
+  }
+
   async getTodos() {
     let { data: todos, error } = await this.supabase
       .from<Todo>('todos')
       .select('*')
-
-    return {todos, error};
-
-  }
-
-  async addTodo(todo: Todo) {
-    const { data, error } = await this.supabase
-      .from('todos')
-      .insert(todo)
-
-    return { data, error };
+      .limit(10)
+    return { todos, error };
   }
 
   async deleteTodo(id: string) {
-    const { data, error } = await this.supabase
+    const data = await this.supabase
       .from('todos')
       .delete()
       .match({ id: id })
+    return data
   }
 
   async update(todo: Todo) {
@@ -52,7 +51,6 @@ export class ApiService {
       .update({ done: todo.done })
       .match({ id: todo.id })
   }
-
 
   listenAll() {
     const mySubscription = this.supabase

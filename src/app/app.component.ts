@@ -12,9 +12,9 @@ export class AppComponent implements OnInit {
   todos: Todo[];
   todo: Todo;
   actionLabel: string = "ADD"
-  constructor(private api: ApiService) {
 
-  }
+  constructor(private api: ApiService) { }
+
   async ngOnInit(): Promise<void> {
     let listen = this.api.listenAll();
     this.api.getTodos()
@@ -33,25 +33,10 @@ export class AppComponent implements OnInit {
     this.clear();
   }
 
-  delete(todo: Todo) {
-    this.api.deleteTodo(todo.id)
-      .then(dados => {
-        console.log(dados)
-        this.todos = this.arrayRemove(this.todos, todo.id);
-      })
-  }
-
   seleciona(todo: Todo) {
     this.todo = todo;
     this.actionLabel = "UPDATE";
   }
-
-  check(todoCheck: Todo) {
-    let todo = todoCheck;
-    todo.done = !todoCheck.done;
-    this.update(todo);
-  }
-
 
   update(todo: Todo) {
     this.api.update(todo)
@@ -60,6 +45,20 @@ export class AppComponent implements OnInit {
         this.todos[foundIndex] = todo;
         this.todo = new Todo();
         this.clear();
+      })
+  }
+
+  check(todoCheck: Todo) {
+    let todo = todoCheck;
+    todo.done = !todoCheck.done;
+    this.update(todo);
+  }
+
+  delete(todo: Todo) {
+    this.api.deleteTodo(todo.id)
+      .then(dados => {
+        console.log(dados)
+        this.todos = this.arrayRemove(this.todos, todo.id);
       })
   }
 
