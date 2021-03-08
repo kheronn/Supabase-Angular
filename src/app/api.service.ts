@@ -6,15 +6,11 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js'
   providedIn: 'root'
 })
 export class ApiService {
-  supabaseUrl = process.env.SUPABASE_URL;
-  supabaseKey = process.env.SUPABASE_KEY
-
-  ;
-
+  supabaseUrl = "your-url";
+  supabaseKey = "your-key-access";
   supabase: SupabaseClient;
 
   constructor() {
-    console.log(this.supabaseUrl)
     this.supabase = createClient(this.supabaseUrl, this.supabaseKey);
   }
 
