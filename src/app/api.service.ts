@@ -6,12 +6,15 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js'
   providedIn: 'root'
 })
 export class ApiService {
-  supabaseUrl = "https://eryktzqdtxyesygmuxeg.supabase.co";
-  supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYxNDU1Mjg4MywiZXhwIjoxOTMwMTI4ODgzfQ.tr25Nyviyvj3vcmZMPbBqRCnt6XcOc4Ui6the_WWh9s";
+  supabaseUrl = process.env.SUPABASE_URL;
+  supabaseKey = process.env.SUPABASE_KEY
+
+  ;
 
   supabase: SupabaseClient;
 
   constructor() {
+    console.log(this.supabaseUrl)
     this.supabase = createClient(this.supabaseUrl, this.supabaseKey);
   }
 
