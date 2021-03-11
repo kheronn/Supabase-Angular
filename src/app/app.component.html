@@ -32,8 +32,14 @@
             <div *ngFor="let todo of todos" class="row px-3 align-items-center todo-item rounded">
                 <div class="col-auto m-1 p-0 d-flex align-items-center">
                     <h2 class="m-0 p-0">
-                        <i (click)="check(todo)" [ngClass]="{'fa fa-check-square-o text-primary btn': todo.done }" title="Unmark as todo"></i>
-                        <i (click)="check(todo)" [ngClass]="{'fa fa-square-o text-primary btn': !todo.done }" title="Mark as todo"></i>
+                        <i
+                        (click)="check(todo)"
+                        class="text-primary btn fa "
+                        [ngClass]="{
+                          'fa-check-square': todo.done,
+                          'fa-square-o': !todo.done
+                        }"
+                      ></i>
                     </h2>
                 </div>
                 <div class="col px-1 m-1 d-flex align-items-center">

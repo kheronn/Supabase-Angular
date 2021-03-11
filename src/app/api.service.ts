@@ -9,6 +9,7 @@ export class ApiService {
   supabaseUrl = "your-url";
   supabaseKey = "your-key-access";
   supabase: SupabaseClient;
+  
 
   constructor() {
     this.supabase = createClient(this.supabaseUrl, this.supabaseKey);

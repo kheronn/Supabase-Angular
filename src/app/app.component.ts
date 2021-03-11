@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
   addTodo() {
     if (this.todo.id) { //Update if exists ID{
-      this.update(this.todo);
+      this.update();
       return;
     }
     this.api.addTodo(this.todo).then((payload) => {
@@ -38,20 +38,19 @@ export class AppComponent implements OnInit {
     this.actionLabel = "UPDATE";
   }
 
-  update(todo: Todo) {
-    this.api.update(todo)
-      .then(dados => {
-        let foundIndex = this.todos.findIndex(t => t.id == todo.id);
-        this.todos[foundIndex] = todo;
-        this.todo = new Todo();
+  update() {
+    this.api.update(this.todo)
+      .then(() => {
+        let foundIndex = this.todos.findIndex(t => t.id == this.todo.id);
+        this.todos[foundIndex] = this.todo;
         this.clear();
       })
   }
 
   check(todoCheck: Todo) {
-    let todo = todoCheck;
-    todo.done = !todoCheck.done;
-    this.update(todo);
+    this.todo = todoCheck;
+    this.todo.done = !todoCheck.done;
+    this.update();
   }
 
   delete(todo: Todo) {
