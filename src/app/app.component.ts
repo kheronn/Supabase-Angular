@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     this.api
       .addTodo(this.todo)
       .then((payload) => {
-        this.todos.push(payload.data[0]);
+        this.todos = [this.todo, ...this.todos]
       })
       .catch((erro) => console.log(`Error in add TODO ${erro}`));
     this.clear();

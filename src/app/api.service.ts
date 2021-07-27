@@ -1,18 +1,18 @@
 import { Todo } from './todo.model';
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  supabaseUrl = "your-url";
-  supabaseKey = "your-key-access";
+
   supabase: SupabaseClient;
-  
+
 
   constructor() {
-    this.supabase = createClient(this.supabaseUrl, this.supabaseKey);
+    this.supabase = createClient(environment.supabaseUrl, environment.supbaseKey);
   }
 
   async addTodo(todo: Todo) {
