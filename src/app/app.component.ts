@@ -12,26 +12,30 @@ export class AppComponent implements OnInit {
   todo: Todo;
   actionLabel: string;
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService) { }
 
   async ngOnInit(): Promise<void> {
-    let listen = this.api.listenAll();
-    this.api.getTodos().then((data) => (this.todos = data.todos));
     this.clear();
+    let { todos, error } = await this.api.getTodos()
+    if (!error) {
+      this.todos = todos ?? [];
+    }
   }
 
-  addTodo() {
+  async addTodo() {
     if (this.todo.id) {
       //Update if exists ID{
       this.update();
       return;
     }
-    this.api
-      .addTodo(this.todo)
-      .then((payload) => {
-        this.todos = [this.todo, ...this.todos]
-      })
-      .catch((erro) => console.log(`Error in add TODO ${erro}`));
+    let { todo, error } = await this.api.addTodo(this.todo)
+    if (error) {
+      console.log(`Error in add TODO ${error.message}`)
+    }
+    else {
+      console.log(todo)
+      this.todos = [todo, ...this.todos]
+    }
     this.clear();
   }
 
@@ -40,12 +44,13 @@ export class AppComponent implements OnInit {
     this.actionLabel = 'UPDATE';
   }
 
-  update() {
-    this.api.update(this.todo).then(() => {
+  async update() {
+    let { error } = await this.api.update(this.todo)
+    if (!error) {
       let foundIndex = this.todos.findIndex((t) => t.id == this.todo.id);
       this.todos[foundIndex] = this.todo;
       this.clear();
-    });
+    }
   }
 
   check(todoCheck: Todo) {
@@ -54,10 +59,9 @@ export class AppComponent implements OnInit {
     this.update();
   }
 
-  delete(todo: Todo) {
-    this.api
-      .deleteTodo(todo.id)
-      .then((dados) => (this.todos = this.arrayRemove(this.todos, todo.id)));
+  async delete(todo: Todo) {
+    await this.api.deleteTodo(todo.id)
+    this.todos = this.arrayRemove(this.todos, todo.id)
   }
 
   arrayRemove(arr: Todo[], id: string) {

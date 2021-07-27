@@ -10,20 +10,20 @@ export class ApiService {
 
   supabase: SupabaseClient;
 
-
   constructor() {
     this.supabase = createClient(environment.supabaseUrl, environment.supbaseKey);
   }
 
-  async addTodo(todo: Todo) {
-    const { data, error } = await this.supabase
+  async addTodo(_todo: Todo) {
+    const { data: todo, error } = await this.supabase
       .from<Todo>('todos')
-      .insert(todo)
-    return { data, error };
+      .insert(_todo)
+      .single()
+    return { todo, error };
   }
 
   async getTodos() {
-    let { data: todos, error } = await this.supabase
+    const { data: todos, error } = await this.supabase
       .from<Todo>('todos')
       .select('*')
       .limit(10)
@@ -31,18 +31,19 @@ export class ApiService {
   }
 
   async deleteTodo(id: string) {
-    const data = await this.supabase
+    return this.supabase
       .from('todos')
       .delete()
-      .match({ id: id })
-    return data
+      .eq('id', id)
+
   }
 
   async update(todo: Todo) {
-    const { data, error } = await this.supabase
+    const { data: todos, error } = await this.supabase
       .from('todos')
       .update(todo)
       .match({ id: todo.id })
+    return { todos, error };
   }
 
   async updatCheck(todo: Todo) {
@@ -50,6 +51,8 @@ export class ApiService {
       .from('todos')
       .update({ done: todo.done })
       .match({ id: todo.id })
+
+    return { data, error };
   }
 
   listenAll() {
@@ -61,5 +64,4 @@ export class ApiService {
       .subscribe()
     return mySubscription;
   }
-
 }
