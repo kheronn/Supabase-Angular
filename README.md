@@ -23,11 +23,11 @@ A CRUD of TODOs using version 11 of Angular and Supabase.
 [Um CRUD com Angular e Supabase](https://kheronn-machado.medium.com/um-crud-com-angular-e-supabase-b166e90658f4) 
 
 
-## Curso Angular e Supabase -Desenvolvemndo sistemas
+## Curso Angular e Supabase -Desenvolvendo sistemas
 
 Que tal construir aplicações em Javascript utilizando o incrível framework Angular 11 no front-end e o Supabase para acessar as APIs e salvar as informações no Banco de dados?
 
-[Udemy](https://www.udemy.com/course/angular-e-supabase) 
+[Link do Curso](https://www.udemy.com/course/angular-e-supabase/?referralCode=B56FB6F7D1428EEA009D) 
 
 
 
